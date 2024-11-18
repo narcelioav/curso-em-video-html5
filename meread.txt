@@ -1,0 +1,7 @@
+Curso em video - Html, Css, Js
+
+Atualizando os arquivos do projeto do curso em videos iniciados a 5 anos.
+
+Site do Google Glass
+
+* Apliquei o comando git clone, para baixar os arquivos do github para o diretorio git no pc.
