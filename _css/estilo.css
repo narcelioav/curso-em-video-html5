@@ -28,8 +28,8 @@ p {
 
 header#cabecalho img#icone {
     position: absolute;
-    left: 780px;
-    /*left: 980px;*/
+    left: 980px;
+    /*left: 780px;*/
     top: 70px;
 }
 
@@ -96,8 +96,8 @@ nav#menu ul {
     text-transform: uppercase;
     position: absolute;
     top: -20px;
-    left: 300px;
-    /*left: 500px;*/
+    left: 500px;
+    /*left: 300px;*/
 }
 
 nav#menu li {
@@ -126,4 +126,27 @@ nav#menu a {
 nav#menu a:hover {
     color: #ffffff;
     text-decoration: underline;
+}
+
+section#corpo {
+    display: block;
+    width: 520px;
+    float: left;
+    border-right: 1px solid #606060;
+    padding-right: 20px;
+}
+
+aside#lateral {
+    display: block;
+    width: 350px;
+    float: right;
+}
+
+footer#rodape {
+    clear: both;
+    border-top: 1px solid #606060;
+}
+
+footer#rodape p {
+    text-align: center;
 }
