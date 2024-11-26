@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocompletar Controlado</title>
+    <style>
+        /* Estilos simples para a lista de sugestões */
+        #suggestions {
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+            /* Inicialmente, escondido */
+            position: absolute;
+            background: white;
+            z-index: 10;
+            width: 200px;
+        }
+
+        #suggestions div {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        #suggestions div:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <label for="input">Digite ou selecione um item:</label>
+    <input type="text" id="input" placeholder="Comece a digitar..." autocomplete="off">
+
+    <!-- Div para exibir as sugestões -->
+    <div id="suggestions"></div>
+
+    <!-- Label para exibir o valor selecionado -->
+    <p id="resultado">Você selecionou: </p>
+
+    <script>
+        const input = document.getElementById('input');
+        const suggestionsDiv = document.getElementById('suggestions');
+        const resultado = document.getElementById('resultado');
+
+        // Lista de opções que queremos sugerir
+        const items = ['Maçã', 'Banana', 'Laranja', 'Uva', 'Pera', 'Morango', 'Melancia'];
+
+        // Função para mostrar sugestões
+        function showSuggestions(value) {
+            suggestionsDiv.innerHTML = '';  // Limpar as sugestões antigas
+            if (value.length > 0) {
+                // Filtra os itens para mostrar apenas os que começam com o valor digitado
+                const filteredItems = items.filter(item => item.toLowerCase().startsWith(value.toLowerCase()));
+                filteredItems.forEach(item => {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.textContent = item;
+                    suggestionItem.onclick = () => selectSuggestion(item);
+                    suggestionsDiv.appendChild(suggestionItem);
+                });
+                suggestionsDiv.style.display = filteredItems.length > 0 ? 'block' : 'none';
+            } else {
+                suggestionsDiv.style.display = 'none';
+            }
+        }
+
+        // Função para selecionar uma sugestão
+        function selectSuggestion(item) {
+            input.value = item;
+            suggestionsDiv.style.display = 'none';
+            resultado.textContent = 'Você selecionou: ' + item;
+        }
+
+        // Evento de digitação no campo de entrada
+        input.addEventListener('input', function () {
+            showSuggestions(input.value);
+        });
+
+        // Evento para esconder sugestões se o campo perder o foco
+        input.addEventListener('blur', function () {
+            setTimeout(() => suggestionsDiv.style.display = 'none', 200); // Delay para permitir clique na sugestão
+        });
+
+        // Evento para manter a lista visível enquanto o campo tem foco
+        input.addEventListener('focus', function () {
+            showSuggestions(input.value);
+        });
+    </script>
+
+</body>
+
+</html>
